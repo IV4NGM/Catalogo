@@ -2,7 +2,7 @@ class Movie{
     constructor(title, overview, score, language, release_date, imagesrc, genres){
         this.title = title
         this.overview = overview
-        this.score = score
+        this.score = Math.round(score) 
         this.language = language
         this.release_date = release_date
         this.imagesrc = imagesrc
@@ -23,7 +23,7 @@ async function getApiData () {
     const genres = await fetch('https://api.themoviedb.org/3/genre/movie/list' + apiKey)
     // console.log(genres)
     const genresID = await genres.json()
-    // console.log(genresID.genres)
+    console.log(genresID.genres)
     // for(let genre of genresID.genres){
     //     console.log(genre)
     // }
@@ -88,9 +88,41 @@ function resetForm(){
 
 function applyFilters(){
     const inputTitle = document.querySelector("#movie-title").value
-    console.log(document.querySelector("#language").value)
+    const inputAllCategories = document.querySelector("#all-categories").checked
+    const inputLanguage = document.querySelector("#language").value
+    const inputScore = document.querySelector("#score").value
+    let selectedCategories = []
+    if(!inputAllCategories){
+        document.querySelectorAll('input[type=checkbox]').forEach((element) =>{
+            if(element.id !== "all-categories"){
+                if(element.checked){
+                    selectedCategories.push(element.value)
+                }
+            }
+        })
+    }
     moviesArrayDisplay = moviesArray.filter((element) =>{
         if(inputTitle !== "" && !element.title.toLocaleLowerCase().includes(inputTitle.toLocaleLowerCase().trim())){
+            return false
+        }
+        if(inputLanguage!=="0"){
+            if(inputLanguage !== element.language){
+                return false
+            }
+        }
+        if(!inputAllCategories){
+            let containsAGenre = false
+            for(let i = 0; i < element.genres.length; i++){
+                if(selectedCategories.includes(element.genres[i])){
+                    containsAGenre = true
+                    break
+                }
+            }
+            if(!containsAGenre){
+                return false
+            }
+        }
+        if(element.score < inputScore){
             return false
         }
         return true
