@@ -1,0 +1,99 @@
+class Movie{
+    constructor(title, overview, score, language, release_date, imagesrc, genres){
+        this.title = title
+        this.overview = overview
+        this.score = score
+        this.language = language
+        this.release_date = release_date
+        this.imagesrc = imagesrc
+        this.genres = genres
+    }
+}
+
+const apiKey = '?api_key=14c0f9442a8897b68fa2d0be6c689997'
+
+let moviesArray = []
+let moviesArrayDisplay = []
+
+async function getApiData () {
+    const response = await fetch('https://api.themoviedb.org/3/trending/movie/day' + apiKey)
+    // console.log(response)
+    const movies = await response.json()
+    // console.log(movies.results)
+    const genres = await fetch('https://api.themoviedb.org/3/genre/movie/list' + apiKey)
+    // console.log(genres)
+    const genresID = await genres.json()
+    // console.log(genresID.genres)
+    // for(let genre of genresID.genres){
+    //     console.log(genre)
+    // }
+    // console.log(genresID.genres.filter(e => e.id == 16)[0].name)
+    for(let movie of movies.results){
+        //poster_sizes: ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original']
+        const imagesrc = "https://image.tmdb.org/t/p/w300" + movie.poster_path
+        let movieGenres = movie.genre_ids
+        let movieGenresNameArray = []
+        let movieGenresP = `<p>`
+        for(let genreNumber of movieGenres){
+            movieGenresP += `${genresID.genres.filter(e => e.id == genreNumber)[0].name} `
+            movieGenresNameArray.push(genresID.genres.filter(e => e.id == genreNumber)[0].name)
+        }
+        movieGenresP += '</p>'
+        const currentMovie = new Movie(movie.original_title, movie.overview, movie.vote_average, movie.original_language, movie.release_date, imagesrc, movieGenresNameArray)
+        moviesArray.push(currentMovie)
+        document.querySelector("#container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
+    }
+    moviesArrayDisplay = [ ...moviesArray ]
+    console.log(moviesArrayDisplay)
+}
+
+
+
+function upgradeSilderData(){
+    document.querySelector("#selected-score").textContent = document.querySelector("#score").value
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    getApiData();
+    upgradeSilderData()
+    document.querySelector("#score").addEventListener("input", upgradeSilderData)
+    toggleAllCategories()
+    document.querySelector("#all-categories").addEventListener("change", toggleAllCategories)
+    document.querySelector("#reset").addEventListener("click", resetForm)
+    document.querySelector("#filter-form").addEventListener("submit", function(event){
+        event.preventDefault()
+        applyFilters()
+    })
+})
+
+function toggleAllCategories(){
+    const allCategoriesCheckbox = document.querySelector("#all-categories")
+    if (allCategoriesCheckbox.checked){
+        document.querySelectorAll('input[type=checkbox]').forEach(element => element.disabled = true)
+        allCategoriesCheckbox.disabled = false
+    } else {
+        allCategoriesCheckbox.checked = false
+        document.querySelectorAll('input[type=checkbox]').forEach(element => element.disabled = false)
+    }
+}
+
+function resetForm(){
+    document.querySelector("#movie-title").textContent = ""
+    document.querySelector("#all-categories").checked = true
+    document.querySelector("#language").value = "0"
+    document.querySelector("#score").value = 5
+    toggleAllCategories()
+    upgradeSilderData()
+}
+
+function applyFilters(){
+    const inputTitle = document.querySelector("#movie-title").value
+    console.log(document.querySelector("#language").value)
+    moviesArrayDisplay = moviesArray.filter((element) =>{
+        if(inputTitle !== "" && !element.title.toLocaleLowerCase().includes(inputTitle.toLocaleLowerCase().trim())){
+            return false
+        }
+        return true
+    })
+    console.log(moviesArrayDisplay)
+}
