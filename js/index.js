@@ -23,10 +23,14 @@ async function getApiData () {
     const genres = await fetch('https://api.themoviedb.org/3/genre/movie/list' + apiKey)
     // console.log(genres)
     const genresID = await genres.json()
-    console.log(genresID.genres)
-    // for(let genre of genresID.genres){
-    //     console.log(genre)
-    // }
+    // console.log(genresID.genres)
+    let index = 0
+    for(let genre of genresID.genres){
+        // console.log(genre.name)
+        createCheckbox(genre.name, index)
+        index++
+    }
+    toggleAllCategories()
     // console.log(genresID.genres.filter(e => e.id == 16)[0].name)
     for(let movie of movies.results){
         //poster_sizes: ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original']
@@ -44,7 +48,7 @@ async function getApiData () {
         document.querySelector("#container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
     }
     moviesArrayDisplay = [ ...moviesArray ]
-    console.log(moviesArrayDisplay)
+    // console.log(moviesArrayDisplay)
 }
 
 
@@ -128,4 +132,27 @@ function applyFilters(){
         return true
     })
     console.log(moviesArrayDisplay)
+}
+
+function createCheckbox(value, index){
+    const checkboxContainer = document.querySelector("#genre-container")
+    const container = document.createElement("div")
+    const input = document.createElement("input")
+    const label = document.createElement("label")
+    const id = "check" + index.toString()
+
+    container.classList.add("form-check")
+    input.classList.add("form-check-input")
+    label.classList.add("form-check-label")
+
+    input.setAttribute("type", "checkbox")
+    input.setAttribute("value", value)
+    input.setAttribute("id", id)
+    label.setAttribute("for", id)
+
+    label.textContent = value
+
+    checkboxContainer.appendChild(container)
+    container.appendChild(input)
+    container.appendChild(label)
 }

@@ -17,13 +17,13 @@
         <input type="text" class="form-control" id="movie-title">
         <p>Buscar por categoría</p>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="df" id="all-categories" checked>
+          <input class="form-check-input" type="checkbox" value="Todas las categorías" id="all-categories" checked>
           <label class="form-check-label" for="all-categories">
             Todas las categorías
           </label>
         </div>
-        <div class="genre-container">
-          <div class="form-check">
+        <div class="genre-container" id="genre-container">
+          <!-- <div class="form-check">
             <input class="form-check-input" type="checkbox" value="Action" id="check1">
             <label class="form-check-label" for="check1">
               Action
@@ -100,7 +100,7 @@
             <label class="form-check-label" for="check3">
               Animation
             </label>
-          </div>
+          </div> -->
         </div>
         <select class="form-select" id="language">
           <option value="0" selected>Seleccionar idioma</option>
@@ -111,7 +111,7 @@
         <input type="range" class="form-range" min="0" max="10" id="score">
         <p id="selected-score"></p>
         <button type="submit" class="btn btn-success">Aplicar filtros</button>
-        <button type="reset" class="btn btn-light" id="reset">Reestablecer</button>
+        <button type="reset" class="btn btn-light" id="reset">Restablecer</button>
       </div>
     </div>
   </form>
