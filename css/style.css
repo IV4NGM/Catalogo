@@ -1,4 +1,73 @@
+body{
+    background-color: #6a040f;
+    color: white;
+}
+
 .genre-container{
     display: grid;
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(auto-fit, 200px);
+}
+
+.navbar-brand{
+    display: flex;
+    align-items: center;
+}
+
+.logo-nav{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    background-color: #6a040f;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.navbar-brand p{
+    font-weight: bold;
+    margin: 0;
+}
+
+.nav-item{
+    margin-right: 20px;
+}
+
+.form-control{
+    min-width: fit-content;
+}
+
+a.navbar-brand{
+    margin-left: 10px;
+}
+
+a.nav-link{
+    font-size: 17px;
+    /* color: #f48c06; */
+}
+
+ul.navbar-nav{
+    margin-left: 20px;
+}
+
+.attribution{
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.attribution p{
+    margin: 0;
+    margin-left: 50px;
+    color: white;
+}
+
+.attribution img{
+    height: 45px;
+    width: auto;
+}
+
+#filter-form{
+    width: 50%;
 }

@@ -57,19 +57,6 @@ function upgradeSilderData(){
     document.querySelector("#selected-score").textContent = document.querySelector("#score").value
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-    getApiData();
-    upgradeSilderData()
-    document.querySelector("#score").addEventListener("input", upgradeSilderData)
-    toggleAllCategories()
-    document.querySelector("#all-categories").addEventListener("change", toggleAllCategories)
-    document.querySelector("#reset").addEventListener("click", resetForm)
-    document.querySelector("#filter-form").addEventListener("submit", function(event){
-        event.preventDefault()
-        applyFilters()
-    })
-})
-
 function toggleAllCategories(){
     const allCategoriesCheckbox = document.querySelector("#all-categories")
     if (allCategoriesCheckbox.checked){
@@ -85,7 +72,7 @@ function resetForm(){
     document.querySelector("#movie-title").textContent = ""
     document.querySelector("#all-categories").checked = true
     document.querySelector("#language").value = "0"
-    document.querySelector("#score").value = 5
+    document.querySelector("#score").value = 0
     toggleAllCategories()
     upgradeSilderData()
 }
@@ -156,3 +143,17 @@ function createCheckbox(value, index){
     container.appendChild(input)
     container.appendChild(label)
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    getApiData()
+    document.querySelector("#score").value = 0
+    upgradeSilderData()
+    document.querySelector("#score").addEventListener("input", upgradeSilderData)
+    toggleAllCategories()
+    document.querySelector("#all-categories").addEventListener("change", toggleAllCategories)
+    document.querySelector("#reset").addEventListener("click", resetForm)
+    document.querySelector("#filter-form").addEventListener("submit", function(event){
+        event.preventDefault()
+        applyFilters()
+    })
+})
