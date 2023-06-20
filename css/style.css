@@ -1,3 +1,11 @@
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
 body{
     background-color: #161a1d;
     color: white;
@@ -9,7 +17,7 @@ h1{
 }
 
 h2{
-    margin-top: 60px;
+    margin-top: 100px;
     margin-bottom: 40px;
 }
 
@@ -21,11 +29,6 @@ h3{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.genre-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
 }
 
 .navbar-brand{
@@ -88,10 +91,6 @@ ul.navbar-nav{
     width: auto;
 }
 
-#filter-form{
-    width: 50%;
-}
-
 .login-card{
     width: 40%;
 }
@@ -115,11 +114,11 @@ ul.navbar-nav{
     width: 70%;
 }
 
-.forgotten-password{
+.action-text{
     color: #004e98;
 }
 
-.forgotten-password:hover{
+.action-text:hover{
     cursor: pointer;
     text-decoration: underline;
 }
@@ -128,4 +127,94 @@ ul.navbar-nav{
     width: 50%;
     display: flex;
     justify-content: center;
+}
+
+.catalogo{
+    display: flex;
+    width: 90%;
+}
+
+.score-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#score{
+    width: 90%;
+}
+
+#filter-form{
+    width: 33%;
+}
+
+.genre-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 140px);
+}
+
+.movies-container{
+    width: 100%;
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.movie-card{
+    width: 300px;
+}
+
+.card-body-movie{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title{
+    align-self: center;
+}
+
+.card-img-movie{
+    height: auto;
+    width: 185px;
+    align-self: center;
+    border-radius: 10px;
+}
+
+.movie-genres-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-genre{
+    margin: 5px;
+}
+
+.btn-play{
+    display: flex;
+    justify-content: center;
+}
+
+.movie-score-container{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.movie-score-container p{
+    margin-bottom: 0;
+    margin-right: 5px;
+}
+
+.star-image{
+    content: url('https://static.vecteezy.com/system/resources/previews/022/133/469/original/star-shape-star-icon-yellow-star-in-rating-symbol-free-png.png');
+    height: 18px;
+    width: 18px;
+}
+
+.description-toggle{
+    margin-top: 10px;
 }

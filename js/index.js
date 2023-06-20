@@ -45,7 +45,7 @@ async function getApiData () {
         movieGenresP += '</p>'
         const currentMovie = new Movie(movie.original_title, movie.overview, movie.vote_average, movie.original_language, movie.release_date, imagesrc, movieGenresNameArray)
         moviesArray.push(currentMovie)
-        document.querySelector("#container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
+        document.querySelector("#movies-container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
     }
     moviesArrayDisplay = [ ...moviesArray ]
     // console.log(moviesArrayDisplay)
