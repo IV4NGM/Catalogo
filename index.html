@@ -73,6 +73,7 @@
       <div class="logo-container">
         <img src="https://flaticons.net/icon.php?slug_category=wildlife&slug_icon=eagle" alt="Logo" width="300" height="300"
         style="background-color: #6a040f; border-radius: 50%;">
+        <h4>Eagle Blade</h4>
       </div>
       <div class="card login-card">
         <div class="card-body">
@@ -93,49 +94,95 @@
         </div>
       </div>
     </div>
-    <h2>Consulta nuestro catálogo</h2>
+    <h2 class="consult-text">Consulta nuestro catálogo</h2>
     <div class="catalogo">
-      <form id="filter-form">
-        <div class="card">
-          <div class="card-body">
-            <label for="movie-title" class="form-label bold-text">Buscar por nombre</label>
-            <input type="text" class="form-control" id="movie-title">
-            <p class="bold-text filter-title">Buscar por categoría</p>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Todas las categorías" id="all-categories" checked>
-              <label class="form-check-label" for="all-categories">
-                Todas las categorías
-              </label>
-            </div>
-            <div class="genre-container" id="genre-container">
-              <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Action" id="check1">
-                <label class="form-check-label" for="check1">
-                  Action
+      <div id="left-catalog" class="left-catalog">
+        <form id="filter-form">
+          <div class="card">
+            <div class="card-body">
+              <label for="movie-title" class="form-label bold-text">Buscar por nombre</label>
+              <input type="text" class="form-control" id="movie-title">
+              <p class="bold-text filter-title">Buscar por categoría</p>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Todas las categorías" id="all-categories" checked>
+                <label class="form-check-label" for="all-categories">
+                  Todas las categorías
                 </label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Adventure" id="check2">
-                <label class="form-check-label" for="check2">
-                  Adventure
-                </label>
-              </div> -->
+              <div class="genre-container" id="genre-container">
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Action" id="check1">
+                  <label class="form-check-label" for="check1">
+                    Action
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Adventure" id="check2">
+                  <label class="form-check-label" for="check2">
+                    Adventure
+                  </label>
+                </div> -->
+              </div>
+              <select class="form-select filter-title" id="language">
+                <option value="0" selected>Todos los idiomas</option>
+                <!-- <option value="en">Inglés</option>
+                <option value="es">Español</option> -->
+              </select>
+              <label for="score" class="form-label bold-text filter-title">Calificación mínima:</label>
+              <div class="score-container">
+                <input type="range" class="form-range" min="0" max="10" value="0" id="score">
+                <p id="selected-score"></p>
+              </div>
+              <button type="submit" class="btn btn-success">Aplicar filtros</button>
+              <button type="reset" class="btn btn-secondary" id="reset">Restablecer</button>
             </div>
-            <select class="form-select filter-title" id="language">
-              <option value="0" selected>Todos los idiomas</option>
-              <!-- <option value="en">Inglés</option>
-              <option value="es">Español</option> -->
-            </select>
-            <label for="score" class="form-label bold-text filter-title">Calificación mínima:</label>
-            <div class="score-container">
-              <input type="range" class="form-range" min="0" max="10" value="0" id="score">
-              <p id="selected-score"></p>
-            </div>
-            <button type="submit" class="btn btn-success">Aplicar filtros</button>
-            <button type="reset" class="btn btn-secondary" id="reset">Restablecer</button>
+          </div>
+        </form>
+        <div class="card advertisement">
+          <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/food-delivery-advertisement-design-template-cfd149289a4f241f8bbde6277ac6960c_screen.jpg?ts=1622237544" class="card-img-top pointer" alt="Burguers 'n' snacks">
+          <div class="card-body">
+            <h5 class="card-title pointer">Burguers 'n' snacks</h5>
+            <p class="card-text advertisement-text">¡Las mejores hamburguesas de la región!</p>
           </div>
         </div>
-      </form>
+        <div class="card advertisement">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c3f95d19772ae3d8dc907e1/5a29be33-a042-4da6-95dc-0828dab5b932/the+popcorn+bar+grand+opening.jpg" class="card-img-top pointer" alt="The Popcorn Bar">
+          <div class="card-body">
+            <h5 class="card-title pointer">The Popcorn Bar</h5>
+            <p class="card-text advertisement-text">¡Pide ahora a domicilio y obtén un 20% de descuento!</p>
+          </div>
+        </div>
+        <div class="card advertisement">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/ffb25d20383697.562eaa80a7fae.jpg" class="card-img-top pointer" alt="Fox Sports">
+          <div class="card-body">
+            <h5 class="card-title pointer">Fox Sports</h5>
+            <p class="card-text advertisement-text">Tu canal de entretenimiento en línea.</p>
+          </div>
+        </div>
+        <div class="card advertisement">
+          <img src="https://i.pinimg.com/originals/ef/17/0a/ef170ad39acabbc7a80331e6347c6272.jpg" class="card-img-top pointer" alt="Coca Cola">
+          <div class="card-body">
+            <h5 class="card-title pointer">Coca Cola</h5>
+            <p class="card-text advertisement-text">¿Ya conoces nuestro nuevo tamaño?</p>
+          </div>
+        </div>
+        <div class="card advertisement">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/404/5545ee162675393.Y3JvcCw4MDgsNjMyLDAsMA.jpg" class="card-img-top pointer" alt="Rappi">
+          <div class="card-body">
+            <h5 class="card-title pointer">Rappi</h5>
+            <p class="card-text advertisement-text">Obtén cupones de descuento al realizar tu primera compra.</p>
+          </div>
+        </div>
+        <div class="card advertisement" style="background-color: #6a040f;">
+          <img src="https://www.recipetineats.com/wp-content/uploads/2020/11/Slightly-sweet-and-salty-popcorn_square.jpg?w=500&h=500&crop=1" class="card-img-top pointer" alt="Eagle Blade">
+          <div class="card-body">
+            <div class="vertical-flex">
+              <h5 class="card-title pointer" style="color: white;">Eagle Blade</h5>
+              <img src="https://flaticons.net/icon.php?slug_category=wildlife&slug_icon=eagle" alt="Eagle blade logo" class="logo-adv">  
+            </div>
+          </div>
+        </div>
+      </div>
     
       <div id="movies-container" class="movies-container grid-ms">
         <!-- <div class="sorry-no-movies">

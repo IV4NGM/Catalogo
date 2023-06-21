@@ -281,6 +281,7 @@ function displayMovies(moviesToDisplay) {
     });
   }
   generateMasonry();
+  document.querySelector("#left-catalog").style.height = moviesContainer.style.height
 }
 
 document.addEventListener("DOMContentLoaded", function () {

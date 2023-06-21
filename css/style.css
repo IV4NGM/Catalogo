@@ -85,13 +85,13 @@ ul.navbar-nav{
 
 .attribution p{
     margin: 0;
-    margin-left: 50px;
     color: white;
 }
 
 .attribution img{
     height: 45px;
     width: auto;
+    margin-right: 20px;
 }
 
 .login-card{
@@ -129,7 +129,14 @@ ul.navbar-nav{
 .logo-container{
     width: 50%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.consult-text{
+    margin-top: 200px;
+    margin-bottom: 50px;
 }
 
 .catalogo{
@@ -147,8 +154,43 @@ ul.navbar-nav{
     width: 90%;
 }
 
-#filter-form{
+.left-catalog{
     width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    min-height: 630px !important;
+    flex-wrap: wrap;
+}
+
+.advertisement{
+    margin-top: 250px;
+    width: 80%;
+    min-height: max-content;
+}
+
+.advertisement-text{
+    text-align: center;
+}
+
+.vertical-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-adv{
+    height: 40px;
+    width: 40px;
+}
+
+.pointer:hover{
+    cursor: pointer;
+}
+
+#filter-form{
+    width: 100%;
 }
 
 .genre-container{
@@ -163,6 +205,7 @@ ul.navbar-nav{
 .movies-container{
     width: 100%;
     margin-left: 30px;
+    /* Comment all the following lines to activate Masonry */
     /* display: grid;
     grid-template-columns: repeat(3, 300px);
     justify-content: center;
@@ -172,11 +215,14 @@ ul.navbar-nav{
 
 .movie-card{
     width: 300px;
+    /* Comment all the following lines to activate Masonry */
+    /* height: 100%; */
 }
 
 .card-body-movie{
     display: flex;
     flex-direction: column;
+    /* Comment all the following lines to activate Masonry */
     /* justify-content: space-between; */
 }
 
