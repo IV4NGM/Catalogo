@@ -17,45 +17,33 @@ let moviesArrayDisplay = []
 
 async function getApiData () {
     const response = await fetch('https://api.themoviedb.org/3/trending/movie/day' + apiKey)
-    // console.log(response)
     const movies = await response.json()
-    // console.log(movies.results)
     const genres = await fetch('https://api.themoviedb.org/3/genre/movie/list' + apiKey)
-    // console.log(genres)
     const genresID = await genres.json()
-    // console.log(genresID)
-    // console.log(genresID.genres)
     let index = 0
     for(let genre of genresID.genres){
-        // console.log(genre.name)
         createCheckbox(genre.name, index)
         index++
     }
     toggleAllCategories()
-    // console.log(genresID.genres.filter(e => e.id == 16)[0].name)
     let languages = []
     for(let movie of movies.results){
         //poster_sizes: ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original']
         const imagesrc = "https://image.tmdb.org/t/p/w300" + movie.poster_path
         let movieGenres = movie.genre_ids
         let movieGenresNameArray = []
-        // let movieGenresP = `<p>`
         for(let genreNumber of movieGenres){
-            // movieGenresP += `${genresID.genres.filter(e => e.id == genreNumber)[0].name} `
             movieGenresNameArray.push(genresID.genres.filter(e => e.id == genreNumber)[0].name)
         }
         if(!languages.includes(movie.original_language)){
             languages.push(movie.original_language)
         }
-        // movieGenresP += '</p>'
         const currentMovie = new Movie(movie.original_title, movie.overview, movie.vote_average, movie.original_language, movie.release_date, imagesrc, movieGenresNameArray)
         moviesArray.push(currentMovie)
-        // document.querySelector("#movies-container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
     }
     createLanguagesSelector(languages)
     moviesArrayDisplay = [ ...moviesArray ]
     displayMovies(moviesArrayDisplay)
-    // console.log(moviesArrayDisplay)
 }
 
 
@@ -125,7 +113,6 @@ function applyFilters(){
         }
         return true
     })
-    // console.log(moviesArrayDisplay)
     displayMovies(moviesArrayDisplay)
 }
 
