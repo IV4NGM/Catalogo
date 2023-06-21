@@ -77,8 +77,7 @@ ul.navbar-nav{
 
 .attribution{
     display: flex;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 20px 20px 20px 20px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -259,4 +258,19 @@ ul.navbar-nav{
 .no-movies-img{
     content: url('https://cdn0.iconfinder.com/data/icons/web-development-48/64/error-404-warning-computer-program-512.png');
     zoom: 50%;
+}
+
+.footer{
+    margin-top: 20px;
+}
+
+.footer-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+}
+
+.footer-body p{
+    margin: 0;
 }
