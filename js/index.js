@@ -33,6 +33,7 @@ async function getApiData () {
     }
     toggleAllCategories()
     // console.log(genresID.genres.filter(e => e.id == 16)[0].name)
+    let languages = []
     for(let movie of movies.results){
         //poster_sizes: ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original']
         const imagesrc = "https://image.tmdb.org/t/p/w300" + movie.poster_path
@@ -43,11 +44,15 @@ async function getApiData () {
             // movieGenresP += `${genresID.genres.filter(e => e.id == genreNumber)[0].name} `
             movieGenresNameArray.push(genresID.genres.filter(e => e.id == genreNumber)[0].name)
         }
+        if(!languages.includes(movie.original_language)){
+            languages.push(movie.original_language)
+        }
         // movieGenresP += '</p>'
         const currentMovie = new Movie(movie.original_title, movie.overview, movie.vote_average, movie.original_language, movie.release_date, imagesrc, movieGenresNameArray)
         moviesArray.push(currentMovie)
         // document.querySelector("#movies-container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
     }
+    createLanguagesSelector(languages)
     moviesArrayDisplay = [ ...moviesArray ]
     displayMovies(moviesArrayDisplay)
     // console.log(moviesArrayDisplay)
@@ -147,11 +152,35 @@ function createCheckbox(value, index){
     container.appendChild(label)
 }
 
+function createLanguagesSelector(languagesArray){
+    const languageSelector = document.querySelector("#language")
+    for(let language of languagesArray){
+        const languageOption = document.createElement("option")
+        languageOption.value = language
+        languageOption.textContent = language
+        languageSelector.appendChild(languageOption)
+    }
+}
+
 function displayMovies(moviesToDisplay){
     const moviesContainer = document.querySelector("#movies-container")
     moviesContainer.innerHTML = ""
     if(moviesToDisplay.length == 0){
-        moviesContainer.innerHTML = "No hay películas que coincidan con los criterios de búsqueda."
+        const noMovies = document.createElement("div")
+        const imageNoMovies = document.createElement("img")
+        const text1 = document.createElement("p")
+        const text2 = document.createElement("p")
+        
+        noMovies.classList.add("sorry-no-movies")
+        imageNoMovies.classList.add("no-movies-img")
+        imageNoMovies.alt = "No movies found"
+        text1.textContent = "Ups, parece que no hay películas que coincidan con tus criterios de búsqueda."
+        text2.textContent = "Intenta nuevamente con otros parámetros."
+
+        noMovies.appendChild(imageNoMovies)
+        noMovies.appendChild(text1)
+        noMovies.appendChild(text2)
+        moviesContainer.appendChild(noMovies)
     } else {
         moviesToDisplay.sort((a, b) =>{
             return (b.score - a.score)
@@ -177,7 +206,7 @@ function displayMovies(moviesToDisplay){
         const description = document.createElement("p")
         const playButton = document.createElement("a")
 
-        movieCard.classList.add("card", "movie-card")
+        movieCard.classList.add("card", "movie-card", "grid-item-ms")
         cardBody.classList.add("card-body", "card-body-movie")
         cardTitle.classList.add("card-title")
         movieImage.classList.add("card-img-top", "card-img-movie")
@@ -198,7 +227,7 @@ function displayMovies(moviesToDisplay){
 
         cardTitle.textContent = movie.title
         movieImage.src = movie.imagesrc
-        movieImage.alt = "Poster" + movie.title
+        movieImage.alt = "Poster " + movie.title
         scoreText.textContent = "Calificación:"
         score.textContent = movie.score
         languageText.textContent = "Idioma original:"
@@ -238,8 +267,10 @@ function displayMovies(moviesToDisplay){
             descriptionText.classList.toggle("bold-text")
             descriptionText.classList.toggle("underlined-text")
             description.classList.toggle("show-text")
+            generateMasonry()
         })
     }
+    generateMasonry()
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -255,3 +286,15 @@ document.addEventListener("DOMContentLoaded", function(){
         applyFilters()
     })
 })
+
+function generateMasonry(){
+    var elem = document.querySelector('.grid-ms');
+    var msnry = new Masonry( elem, {
+    // options
+    itemSelector: '.grid-item-ms',
+    columnWidth: 300,
+    gutter: 20
+    });
+}
+
+window.onload = generateMasonry

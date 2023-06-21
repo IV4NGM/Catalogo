@@ -11,6 +11,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
   <link rel="stylesheet" href="./css/style.css">
   <title>Catálogo</title>
 </head>
@@ -95,9 +97,9 @@
       <form id="filter-form">
         <div class="card">
           <div class="card-body">
-            <label for="movie-title" class="form-label">Buscar por nombre</label>
+            <label for="movie-title" class="form-label bold-text">Buscar por nombre</label>
             <input type="text" class="form-control" id="movie-title">
-            <p>Buscar por categoría</p>
+            <p class="bold-text filter-title">Buscar por categoría</p>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Todas las categorías" id="all-categories" checked>
               <label class="form-check-label" for="all-categories">
@@ -118,12 +120,12 @@
                 </label>
               </div> -->
             </div>
-            <select class="form-select" id="language">
-              <option value="0" selected>Seleccionar idioma</option>
-              <option value="en">Inglés</option>
-              <option value="es">Español</option>
+            <select class="form-select filter-title" id="language">
+              <option value="0" selected>Todos los idiomas</option>
+              <!-- <option value="en">Inglés</option>
+              <option value="es">Español</option> -->
             </select>
-            <label for="score" class="form-label">Calificación mínima:</label>
+            <label for="score" class="form-label bold-text filter-title">Calificación mínima:</label>
             <div class="score-container">
               <input type="range" class="form-range" min="0" max="10" value="0" id="score">
               <p id="selected-score"></p>
@@ -134,8 +136,39 @@
         </div>
       </form>
     
-      <div id="movies-container" class="movies-container">
-        <div class="card movie-card">
+      <div id="movies-container" class="movies-container grid-ms">
+        <!-- <div class="sorry-no-movies">
+          <img class="no-movies-img">
+          <p>Ups, parece que no hay películas que coincidan con tus criterios de búsqueda.</p>
+          <p>Intenta nuevamente con otros parámetros.</p>
+        </div> -->
+        <!-- <div class="card movie-card grid-item-ms">
+          <div class="card-body card-body-movie">
+            <h5 class="card-title">Extraction 2</h5>
+            <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Calificación:</p>
+              <p class="card-text">8</p>
+              <img class="star-image">
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Idioma original:</p>
+              <p class="card-text">en</p>
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Fecha de lanzamiento:</p>
+              <p class="card-text">2023-06-12</p>
+            </div>
+            <div class="movie-genres-container">
+              <button class="btn btn-outline-secondary movie-genre">Science Fiction</button>
+              <button class="btn btn-outline-secondary movie-genre">Adventure</button>
+            </div>
+            <p class="action-text description-toggle">Descripción</p>
+            <p class="card-text description-text">Tasked with extracting a family who is at the mercy of a Georgian gangster, Tyler Rake infiltrates one of the world's deadliest prisons in order to save them. But when the extraction gets hot, and the gangster dies in the heat of battle, his equally ruthless brother tracks down Rake and his team to Sydney, in order to get revenge.</p>
+            <a href="" class="btn btn-success btn-play"> <span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
+          </div>
+        </div>
+        <div class="card movie-card grid-item-ms">
           <div class="card-body card-body-movie">
             <h5 class="card-title">Extraction 2</h5>
             <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
@@ -162,34 +195,7 @@
             <a href="" class="btn btn-success btn-play"> <span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
           </div>
         </div>
-        <div class="card movie-card">
-          <div class="card-body card-body-movie">
-            <h5 class="card-title">Extraction 2</h5>
-            <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
-            <div class="movie-row-container">
-              <p class="card-text bold-text">Calificación:</p>
-              <p class="card-text">8</p>
-              <img class="star-image">
-            </div>
-            <div class="movie-row-container">
-              <p class="card-text bold-text">Idioma original:</p>
-              <p class="card-text">en</p>
-            </div>
-            <div class="movie-row-container">
-              <p class="card-text bold-text">Fecha de lanzamiento:</p>
-              <p class="card-text">2023-06-12</p>
-            </div>
-            <div class="movie-genres-container">
-              <button class="btn btn-outline-secondary movie-genre">Science Fiction</button>
-              <button class="btn btn-outline-secondary movie-genre">Action</button>
-              <button class="btn btn-outline-secondary movie-genre">Adventure</button>
-            </div>
-            <p class="action-text description-toggle">Descripción</p>
-            <p class="card-text description-text">Tasked with extracting a family who is at the mercy of a Georgian gangster, Tyler Rake infiltrates one of the world's deadliest prisons in order to save them. But when the extraction gets hot, and the gangster dies in the heat of battle, his equally ruthless brother tracks down Rake and his team to Sydney, in order to get revenge.</p>
-            <a href="" class="btn btn-success btn-play"> <span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
-          </div>
-        </div>
-        <div class="card movie-card">
+        <div class="card movie-card grid-item-ms">
           <div class="card-body card-body-movie">
             <h5 class="card-title">Extraction 2</h5>
             <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
@@ -216,6 +222,86 @@
             <a class="btn btn-success btn-play"><span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
           </div>
         </div>
+        <div class="card movie-card grid-item-ms">
+          <div class="card-body card-body-movie">
+            <h5 class="card-title">Extraction 2</h5>
+            <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Calificación:</p>
+              <p class="card-text">8</p>
+              <img class="star-image">
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Idioma original:</p>
+              <p class="card-text">en</p>
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Fecha de lanzamiento:</p>
+              <p class="card-text">2023-06-12</p>
+            </div>
+            <div class="movie-genres-container">
+              <button class="btn btn-outline-secondary movie-genre">Science Fiction</button>
+              <button class="btn btn-outline-secondary movie-genre">Action</button>
+            </div>
+            <p class="action-text description-toggle">Descripción</p>
+            <p class="card-text description-text">Tasked with extracting a family who is at the mercy of a Georgian gangster, Tyler Rake infiltrates one of the world's deadliest prisons in order to save them. But when the extraction gets hot, and the gangster dies in the heat of battle, his equally ruthless brother tracks down Rake and his team to Sydney, in order to get revenge.</p>
+            <a class="btn btn-success btn-play"><span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
+          </div>
+        </div>
+        <div class="card movie-card grid-item-ms">
+          <div class="card-body card-body-movie">
+            <h5 class="card-title">Extraction 2</h5>
+            <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Calificación:</p>
+              <p class="card-text">8</p>
+              <img class="star-image">
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Idioma original:</p>
+              <p class="card-text">en</p>
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Fecha de lanzamiento:</p>
+              <p class="card-text">2023-06-12</p>
+            </div>
+            <div class="movie-genres-container">
+              <button class="btn btn-outline-secondary movie-genre">Science Fiction</button>
+              <button class="btn btn-outline-secondary movie-genre">Action</button>
+              <button class="btn btn-outline-secondary movie-genre">Adventure</button>
+            </div>
+            <p class="action-text description-toggle">Descripción</p>
+            <p class="card-text description-text">Tasked with extracting a family who is at the mercy of a Georgian gangster, Tyler Rake infiltrates one of the world's deadliest prisons in order to save them. But when the extraction gets hot, and the gangster dies in the heat of battle, his equally ruthless brother tracks down Rake and his team to Sydney, in order to get revenge.</p>
+            <a href="" class="btn btn-success btn-play"> <span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
+          </div>
+        </div>
+        <div class="card movie-card grid-item-ms">
+          <div class="card-body card-body-movie">
+            <h5 class="card-title">Extraction 2</h5>
+            <img src="https://image.tmdb.org/t/p/w185/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" class="card-img-top card-img-movie" alt="Poster">
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Calificación:</p>
+              <p class="card-text">8</p>
+              <img class="star-image">
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Idioma original:</p>
+              <p class="card-text">en</p>
+            </div>
+            <div class="movie-row-container">
+              <p class="card-text bold-text">Fecha de lanzamiento:</p>
+              <p class="card-text">2023-06-12</p>
+            </div>
+            <div class="movie-genres-container">
+              <button class="btn btn-outline-secondary movie-genre">Science Fiction</button>
+              <button class="btn btn-outline-secondary movie-genre">Action</button>
+              <button class="btn btn-outline-secondary movie-genre">Adventure</button>
+            </div>
+            <p class="action-text description-toggle">Descripción</p>
+            <p class="card-text description-text">Tasked with extracting a family who is at the mercy of a Georgian gangster, Tyler Rake infiltrates one of the world's deadliest prisons in order to save them. But when the extraction gets hot, and the gangster dies in the heat of battle, his equally ruthless brother tracks down Rake and his team to Sydney, in order to get revenge.</p>
+            <a href="" class="btn btn-success btn-play"> <span class="material-symbols-outlined">play_arrow</span> Ver ahora</a>
+          </div>
+        </div> -->
       </div>
     </div>
 
