@@ -25,6 +25,10 @@ h3{
     color: #e5383b;
 }
 
+h5{
+    text-align: center;
+}
+
 .body-container{
     display: flex;
     flex-direction: column;
@@ -181,6 +185,7 @@ ul.navbar-nav{
     width: 185px;
     align-self: center;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .movie-genres-container{
@@ -197,14 +202,14 @@ ul.navbar-nav{
     justify-content: center;
 }
 
-.movie-score-container{
+.movie-row-container{
     display: flex;
     align-items: center;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
-.movie-score-container p{
+.movie-row-container p{
     margin-bottom: 0;
     margin-right: 5px;
 }
@@ -217,4 +222,21 @@ ul.navbar-nav{
 
 .description-toggle{
     margin-top: 10px;
+}
+
+.description-text{
+    text-align: justify;
+    display: none;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+.underlined-text{
+    text-decoration: underline;
+}
+
+.show-text{
+    display: block;
 }

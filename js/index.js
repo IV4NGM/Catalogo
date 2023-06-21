@@ -23,6 +23,7 @@ async function getApiData () {
     const genres = await fetch('https://api.themoviedb.org/3/genre/movie/list' + apiKey)
     // console.log(genres)
     const genresID = await genres.json()
+    // console.log(genresID)
     // console.log(genresID.genres)
     let index = 0
     for(let genre of genresID.genres){
@@ -37,17 +38,18 @@ async function getApiData () {
         const imagesrc = "https://image.tmdb.org/t/p/w300" + movie.poster_path
         let movieGenres = movie.genre_ids
         let movieGenresNameArray = []
-        let movieGenresP = `<p>`
+        // let movieGenresP = `<p>`
         for(let genreNumber of movieGenres){
-            movieGenresP += `${genresID.genres.filter(e => e.id == genreNumber)[0].name} `
+            // movieGenresP += `${genresID.genres.filter(e => e.id == genreNumber)[0].name} `
             movieGenresNameArray.push(genresID.genres.filter(e => e.id == genreNumber)[0].name)
         }
-        movieGenresP += '</p>'
+        // movieGenresP += '</p>'
         const currentMovie = new Movie(movie.original_title, movie.overview, movie.vote_average, movie.original_language, movie.release_date, imagesrc, movieGenresNameArray)
         moviesArray.push(currentMovie)
-        document.querySelector("#movies-container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
+        // document.querySelector("#movies-container").innerHTML +=`<div><p>${currentMovie.title}</p> <p>${currentMovie.overview}</p> <p>Calificación: ${currentMovie.score}</p> <p>Idioma original: ${currentMovie.language}</p> <p>Fecha de lanzamiento: ${currentMovie.release_date}</p> ${movieGenresP} <img src=${currentMovie.imagesrc}></div>`
     }
     moviesArrayDisplay = [ ...moviesArray ]
+    displayMovies(moviesArrayDisplay)
     // console.log(moviesArrayDisplay)
 }
 
@@ -118,7 +120,8 @@ function applyFilters(){
         }
         return true
     })
-    console.log(moviesArrayDisplay)
+    // console.log(moviesArrayDisplay)
+    displayMovies(moviesArrayDisplay)
 }
 
 function createCheckbox(value, index){
@@ -142,6 +145,101 @@ function createCheckbox(value, index){
     checkboxContainer.appendChild(container)
     container.appendChild(input)
     container.appendChild(label)
+}
+
+function displayMovies(moviesToDisplay){
+    const moviesContainer = document.querySelector("#movies-container")
+    moviesContainer.innerHTML = ""
+    if(moviesToDisplay.length == 0){
+        moviesContainer.innerHTML = "No hay películas que coincidan con los criterios de búsqueda."
+    } else {
+        moviesToDisplay.sort((a, b) =>{
+            return (b.score - a.score)
+        })
+    }
+    for(let movie of moviesToDisplay){
+        const movieCard = document.createElement("div")
+        const cardBody = document.createElement("div")
+        const cardTitle = document.createElement("h5")
+        const movieImage = document.createElement("img")
+        const scoreRow = document.createElement("div")
+        const scoreText =  document.createElement("p")
+        const score = document.createElement("p")
+        const starImage = document.createElement("img")
+        const languageRow = document.createElement("div")
+        const languageText =  document.createElement("p")
+        const language = document.createElement("p")
+        const release_dateRow = document.createElement("div")
+        const release_dateText =  document.createElement("p")
+        const release_date = document.createElement("p")
+        const genresContainer = document.createElement("div")
+        const descriptionText = document.createElement("p")
+        const description = document.createElement("p")
+        const playButton = document.createElement("a")
+
+        movieCard.classList.add("card", "movie-card")
+        cardBody.classList.add("card-body", "card-body-movie")
+        cardTitle.classList.add("card-title")
+        movieImage.classList.add("card-img-top", "card-img-movie")
+        scoreRow.classList.add("movie-row-container")
+        scoreText.classList.add("card-text", "bold-text")
+        score.classList.add("card-text")
+        starImage.classList.add("star-image")
+        languageRow.classList.add("movie-row-container")
+        languageText.classList.add("card-text", "bold-text")
+        language.classList.add("card-text")
+        release_dateRow.classList.add("movie-row-container")
+        release_dateText.classList.add("card-text", "bold-text")
+        release_date.classList.add("card-text")
+        genresContainer.classList.add("movie-genres-container")
+        descriptionText.classList.add("action-text", "description-toggle")
+        description.classList.add("card-text", "description-text")
+        playButton.classList.add("btn", "btn-success", "btn-play")
+
+        cardTitle.textContent = movie.title
+        movieImage.src = movie.imagesrc
+        movieImage.alt = "Poster" + movie.title
+        scoreText.textContent = "Calificación:"
+        score.textContent = movie.score
+        languageText.textContent = "Idioma original:"
+        language.textContent = movie.language
+        release_dateText.textContent = "Fecha de lanzamiento:"
+        release_date.textContent = movie.release_date
+        for(let genre of movie.genres){
+            const genreButton = document.createElement("button")
+            genreButton.classList.add("btn", "btn-outline-secondary", "movie-genre")
+            genreButton.textContent = genre
+            genresContainer.appendChild(genreButton)
+        }
+        descriptionText.textContent = "Descripción"
+        description.textContent = movie.overview
+        playButton.innerHTML = `<span class="material-symbols-outlined">play_arrow</span> Ver ahora`
+
+        movieCard.appendChild(cardBody)
+        cardBody.appendChild(cardTitle)
+        cardBody.appendChild(movieImage)
+        cardBody.appendChild(scoreRow)
+        scoreRow.appendChild(scoreText)
+        scoreRow.appendChild(score)
+        scoreRow.appendChild(starImage)
+        cardBody.appendChild(languageRow)
+        languageRow.appendChild(languageText)
+        languageRow.appendChild(language)
+        cardBody.appendChild(release_dateRow)
+        release_dateRow.appendChild(release_dateText)
+        release_dateRow.appendChild(release_date)
+        cardBody.appendChild(genresContainer)
+        cardBody.appendChild(descriptionText)
+        cardBody.appendChild(description)
+        cardBody.appendChild(playButton)
+        moviesContainer.appendChild(movieCard)
+
+        descriptionText.addEventListener("click", function(){
+            descriptionText.classList.toggle("bold-text")
+            descriptionText.classList.toggle("underlined-text")
+            description.classList.toggle("show-text")
+        })
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function(){
