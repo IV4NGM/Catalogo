@@ -163,12 +163,11 @@ ul.navbar-nav{
 .movies-container{
     width: 100%;
     margin-left: 30px;
-    /* display: grid; */
-    /* grid-template-columns: repeat(3, 300px); */
-    /* grid-template-rows: repeat(auto-fit, 800px); */
-    /* justify-content: center; */
-    /* gap: 15px; */
-    /* align-items: flex-start; */
+    /* display: grid;
+    grid-template-columns: repeat(3, 300px);
+    justify-content: center;
+    gap: 15px;
+    align-items: flex-start; */
 }
 
 .movie-card{
@@ -178,10 +177,12 @@ ul.navbar-nav{
 .card-body-movie{
     display: flex;
     flex-direction: column;
+    /* justify-content: space-between; */
 }
 
 .card-title{
     align-self: center;
+    margin-bottom: 20px;
 }
 
 .card-img-movie{
@@ -261,7 +262,7 @@ ul.navbar-nav{
 }
 
 .footer{
-    margin-top: 20px;
+    margin-top: 80px;
 }
 
 .footer-body{
